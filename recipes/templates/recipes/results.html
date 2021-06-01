@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ans">
+    <h2>{{ recipe_det.title }}</h2>
+    <h5>{{ recipe_det.category}}</h5>
+    <div class="recipe">
+        <p id="details">Składniki</p>
+        <ul>
+            {% for ingredient in recipe_det.ingredients.all %}
+            <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+        <p id="details">Sposób przygotowania</p>
+        <p>{{ recipe_det.steps|linebreaks }}</p>
+        <p id="details">Czas przygotowania</p>
+        <p>{{ recipe_det.prep_time }}</p>
+        <p id="details">Ilość porcji</p>
+        <p>{{ recipe_det.servings }}</p>
+        <p id="details">Poziom trudności</p>
+        <p>{{ recipe_det.difficulty }}</p>
+        <p id="details">Autor</p>
+        <p>{{ recipe_det.author }}</p>
+        <p id="details">Data dodania</p>
+        <p>{{ recipe_det.pub_date }}</p>
+        <img src="{{recipe_det.image.url}}">
+    </div>
+    <hr />
+    <li><a href="{% url 'comments' %}">Zobacz komentarze</a></li>
+</div>
+
+{% endblock %}

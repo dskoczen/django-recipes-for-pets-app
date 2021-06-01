@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ans">
+    <h3>Przepisy:</h3>
+    {% if recipe_list %}
+    <ul>
+        {% for recipe in recipe_list %}
+        <li><a href="{% url 'results' recipe.title %}">{{ recipe.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Brak przepisów.</p>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'formRecipe' %}">Dodaj przepis</a></p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

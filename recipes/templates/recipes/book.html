@@ -1,0 +1,27 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ans">
+    <h3>Polecane książki:</h3>
+    {% if book_list %}
+    <ul>
+        {% for book in book_list %}
+        <li>{{ book.title }} <p>{{book.author}}</p> Kategoria: {{book.category}}<p>{{book.description}}</p></li>
+        <p><a href="{% url 'delBook' book.pk %}">Usuń</a></p>
+        <p><a href="{% url 'editBook' book.pk %}">Edytuj </a></p>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Brak książek.</p>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'formBook' %}">Dodaj książke</a></p>
+    {% endif %}
+
+</div>
+        </div>
+
+{% endblock %}

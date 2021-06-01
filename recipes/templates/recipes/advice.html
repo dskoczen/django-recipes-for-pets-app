@@ -1,0 +1,27 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ans">
+    <h3>Porady:</h3>
+    {% if advice_list %}
+    <ul>
+        {% for advice in advice_list %}
+        <li>{{ advice.category }} <p>{{advice.author}}</p> {{advice.title}}<p>{{advice.text|linebreaks}}</p></li>
+        <p><a href="{% url 'delAdvice' advice.pk %}">Usuń</a></p>
+        <p><a href="{% url 'editAdvice' advice.pk %}">Edytuj </a></p>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Brak porad.</p>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'formAdvice' %}">Dodaj porade</a></p>
+    {% endif %}
+
+</div>
+        </div>
+
+{% endblock %}

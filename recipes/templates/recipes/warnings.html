@@ -1,0 +1,34 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="ans">
+    <h3>Ostrzeżenia:</h3>
+    {% if warning_list %}
+    <ul>
+        {% for war in warning_list %}
+        <li>
+            {{ war.category }} <p>{{war.name}}</p> {{war.description|linebreaks}}
+            {% if war.ScientificallyProven %}
+            Potwierdzone naukowo.
+            {% else %}
+            Ostrzeżenie nie zostało potwierdzone naukowo.
+            {% endif %}
+            <p><a href="{% url 'delWarning' war.pk %}">Usuń</a></p>
+            <p><a href="{% url 'editWarning' war.pk %}">Edytuj </a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Brak ostrzeżeń.</p>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'formWarning' %}">Dodaj ostrzeżenie</a></p>
+    {% endif %}
+
+</div>
+        </div>
+
+{% endblock %}

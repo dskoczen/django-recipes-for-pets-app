@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Przepisy kulinarne dla zwierząt domowych</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Przepisy kulinarne dla zwierząt domowych</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Strona główna</a></li>
+                <li><a href="{% url 'book' %}">Książki</a></li>
+                <li><a href="{% url 'login' %}">Zaloguj się</a></li>
+                <li><a href="{% url 'advice' %}">Porady</a></li>
+                <li><a href="{% url 'warnings' %}">Ostrzeżenia</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="ans">
+            <h3>Kategorie:</h3>
+            {% if cat_list %}
+            <ul>
+                {% for category in cat_list %}
+                <li><a href="{% url 'detail' category.id %}">{{ category.name }}</a></li>
+                <p><a href="{% url 'delCategory' category.id %}">Usuń </a></p>
+                <p><a href="{% url 'editCategory' category.id %}">Edytuj </a></p>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Brak kategorii.</p>
+            {% endif %}
+            <hr>
+            {% if request.user.is_authenticated %}
+            <p><a href="{% url 'formCategory' %}">Dodaj kategorie</a></p>
+            <p><a href="{% url 'formIngredients' %}">Dodaj składniki</a></p>
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        Daria Skoczeń
+    </footer>
+
+
+</body>
+</html> 
